@@ -19,11 +19,16 @@ const StoreScreen = () => {
       className="w-full flex-1"
     >
       <SafeAreaView>
-        <View className="container">
-          <View className="flex-row justify-between items-center px-4">
-            <Bars3CenterLeftIcon color={storeColors.text} size="30" />
-            <BellIcon color={storeColors.text} size="30" />
-          </View>
+        <View className="flex-row justify-between items-center px-4">
+          <Bars3CenterLeftIcon color={storeColors.text} size="30" />
+          <BellIcon color={storeColors.text} size="30" />
+        </View>
+        
+        <ScrollView
+          className="container"
+          style={{height: "100%"}}
+          showsVerticalScrollIndicator={false}
+        >
           
           {/* categories */}
           <View className="mt-3 space-y-3">
@@ -108,10 +113,7 @@ const StoreScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <ScrollView
-              style={{height: 320}}
-              showsVerticalScrollIndicator={false}
-            >
+            <View>
               {
                 games.map((game, index) => {
                   let bg = game.id === selectedGame ? 'rgba(255, 255, 255, 0.4)' : 'transparent'
@@ -154,9 +156,9 @@ const StoreScreen = () => {
                   )
                 })
               }
-            </ScrollView>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </LinearGradient>
   )
