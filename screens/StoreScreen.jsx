@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { Bars3CenterLeftIcon, BellIcon } from "react-native-heroicons/solid"
+import { ArrowDownTrayIcon, Bars3CenterLeftIcon, BellIcon } from "react-native-heroicons/solid"
 
 import { storeColors } from "../theme"
 import { categories, featured, games } from "../config"
@@ -11,6 +11,7 @@ import GameCard from "../components/GameCard"
 
 const StoreScreen = () => {
   const [activeCategory, setActiveCategory] = useState('Action')
+  const [selectedGame, setSelectedGame] = useState(null)
 
   return (
     <LinearGradient
@@ -86,6 +87,74 @@ const StoreScreen = () => {
                 }
               </ScrollView>
             </View>
+          </View>
+
+          {/* top action games list */}
+          <View className="mt-8">
+            <View className="flex-row justify-between items-center mb-2">
+              <Text
+                style={{color: storeColors.text}}
+                className="ml-4 text-lg font-bold"
+              >
+                Top Action Games
+              </Text>
+
+              <TouchableOpacity
+                className="mr-4"
+              >
+                <Text
+                  className="text-blue-600 font-bold"
+                >See All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView
+              style={{height: 320}}
+              showsVerticalScrollIndicator={false}
+            >
+              {
+                games.map((game, index) => {
+                  let bg = game.id === selectedGame ? 'rgba(255, 255, 255, 0.4)' : 'transparent'
+
+                  return (
+                    <TouchableOpacity
+                      style={{backgroundColor: bg, }}
+                      className="mx-4 p-2 mb-2 flex-row rounded-3xl"
+                      onPress={() => setSelectedGame(game.id)}
+                      key={index}
+                    >
+                      <Image
+                        source={game.image}
+                        style={{width: 80, height: 80}}
+                        className="rounded-2xl"
+                        />
+                      <View className="flex-1 flex justify-center pl-3 space-y-3">
+                        <Text style={{color: storeColors.text}} className="font-semibold">{game.title}</Text>
+
+                        <View className="flex-row space-x-3">
+                          <View className="flex-row space-x-1">
+                            <Image
+                              className="h-4 w-4 opacity-80"
+                              source={require('../assets/images/fullStar.png')}
+                            />
+                            <Text className="text-xs text-gray-700">{game.stars}</Text>
+                          </View>
+
+                          <View className="flex-row space-x-1">
+                            <ArrowDownTrayIcon size="15" className="text-blue-500" />
+                            <Text className="text-xs text-gray-700">{game.downloads}</Text>
+                          </View>
+                        </View>
+                      </View>
+
+                      <View className="flex justify-center items-center">
+                        <GradientButton value="play" buttonClass="py-2 px-5" />
+                      </View>
+                    </TouchableOpacity>
+                  )
+                })
+              }
+            </ScrollView>
           </View>
         </View>
       </SafeAreaView>
