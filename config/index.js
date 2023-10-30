@@ -61,7 +61,7 @@ const games = [
       stars: 3.5
   },
   {
-      id: 4,
+      id: 5 ,
       title: "Clash of Clans",
       image: require('../assets/images/clashofclans.png'),
       downloads: '20k',

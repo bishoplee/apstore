@@ -19,7 +19,7 @@ const StoreScreen = () => {
       className="w-full flex-1"
     >
       <SafeAreaView>
-        <View className="flex-row justify-between items-center px-4">
+        <View className="flex-row justify-between items-center px-4 py-2">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
           <BellIcon color={storeColors.text} size="30" />
         </View>
@@ -65,7 +65,6 @@ const StoreScreen = () => {
                         </TouchableOpacity>
                       )
                     }
-
                   })
                 }
               </ScrollView>
@@ -113,7 +112,7 @@ const StoreScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <View>
+            <View className="pb-16">
               {
                 games.map((game, index) => {
                   let bg = game.id === selectedGame ? 'rgba(255, 255, 255, 0.4)' : 'transparent'
@@ -143,7 +142,7 @@ const StoreScreen = () => {
                           </View>
 
                           <View className="flex-row space-x-1">
-                            <ArrowDownTrayIcon size="15" className="text-blue-500" />
+                            <ArrowDownTrayIcon size="18" color="rgb(55, 61, 81)" />
                             <Text className="text-xs text-gray-700">{game.downloads}</Text>
                           </View>
                         </View>
